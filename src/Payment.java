@@ -4,6 +4,7 @@ public class Payment {
     public static final String askCardName = "What is the name on the card ?";
     public static final String askExp = "What is your card's expiration date?";
     public static final String askSecurityCode = "What is your card's security code?";
+    public static final String askValidSecurityCode = "Please enter valid security code";
     public String cardNumber;
     public String expDate;
     public String nameOnTheCard;
@@ -16,11 +17,20 @@ public class Payment {
         this.securityCode = securityCode;
     }
 
+   public static boolean isSecurityValid(String securityCode){
+        return securityCode.matches("[\\d]{3}");
+   }
+
     public static Payment createPayment(){
         String cardNumber = ScannerHelper.getString(askCardNumber);
         String expDate = ScannerHelper.getString(askExp);
         String nameOnTheCard = ScannerHelper.getString(askCardName);
         String securityCode = ScannerHelper.getString(askSecurityCode);
+
+        while(!isSecurityValid(securityCode)){
+            securityCode = ScannerHelper.getString(askValidSecurityCode);
+        }
+
 
         return new Payment(cardNumber, expDate, nameOnTheCard, securityCode);
     }
@@ -34,4 +44,10 @@ public class Payment {
                 ", securityCode='" + securityCode + '\'' +
                 '}';
     }
+
+    public static void main(String[] args) {
+        System.out.println(createPayment());
+    }
+
+
 }

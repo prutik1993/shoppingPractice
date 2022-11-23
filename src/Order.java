@@ -48,7 +48,8 @@ public class Order {
             System.out.println(Questions.totalPrice + totalPrice);
 
             //print address
-            //print payment
+            //print paymentn
+
             System.out.println(address);
             System.out.println(payment);
 
